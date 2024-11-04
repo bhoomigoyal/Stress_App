@@ -1,4 +1,4 @@
-// app/HomeScreen.js (Your mood tracking component)
+// page wrt the Figma --> 5
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -17,7 +17,7 @@ const MOODS = [
   { emoji: '😠', label: 'Angry' },
 ];
 
-const HomeScreen = () => {
+const MoodTracker = () => {
   const insets = useSafeAreaInsets();
   const [selectedMood, setSelectedMood] = useState(null);
   const router = useRouter();
@@ -159,4 +159,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default MoodTracker;

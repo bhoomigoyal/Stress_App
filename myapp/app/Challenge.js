@@ -1,0 +1,1 @@
+// page wrt the Figma --> 7

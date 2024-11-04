@@ -1,11 +1,11 @@
-// app/second.js
+// page wrt the Figma --> 1
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-export default function SecondScreen() {
+export default function Greeting() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
@@ -20,7 +20,15 @@ export default function SecondScreen() {
       </TouchableOpacity>
 
       <View style={styles.content}>
-        <Text style={styles.text}>Hello!</Text>
+        <Text>There are a total of 8 Pages - Everyone please complete the page that was assigned to you. The files have already beeen made, so you may start completing the code in them.</Text>
+        <Text>1 Greeting</Text>
+        <Text>2 SignIn</Text>
+        <Text>3 SignUp</Text>
+        <Text>4 Home</Text>
+        <Text>5 MoodTracker</Text>
+        <Text>6 Journal</Text>
+        <Text>7 Challenges</Text>
+        <Text>8 Rewards</Text>
       </View>
     </View>
   );
