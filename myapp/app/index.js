@@ -1,10 +1,10 @@
 import { View } from 'react-native';
-import Greeting from './Greeting';
+import WelcomeScreen from './WelcomeScreen';
 
 export default function Page() {
   return (
     <View style={{ flex: 1 }}>
-      <Greeting />
+      <WelcomeScreen/>
     </View>
   );
 }
