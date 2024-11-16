@@ -24,6 +24,9 @@
       }
     },
     "scheme": "myapp",
-    "main": "expo-router/entry" 
+    "main": "expo-router/entry",
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
