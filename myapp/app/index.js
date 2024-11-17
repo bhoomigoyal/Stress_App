@@ -5,11 +5,12 @@ import SignIn from './SignIn';
 import Challenge from './Challenge';
 import Rewards from './Rewards';
 import Journal from './Journal';
+import WelcomeScreen from './WelcomeScreen';
 
 export default function Page() {
   return (
     <View style={{ flex: 1 }}>
-      <Journal/>
+      <WelcomeScreen/>
     </View>
   );
 }
