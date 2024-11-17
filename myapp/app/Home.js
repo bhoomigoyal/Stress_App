@@ -20,7 +20,7 @@ const Home = () => {
       <View style={styles.top}>
         {/* Header Section */}
         <View style={styles.header}>
-            <Image source={require('../assets/profile.png')} style={styles.profileImage} />
+            <Image source={require('../assets/pfp.jpg')} style={styles.profileImage} />
             <Text style={styles.greeting}>Hi, there!</Text>
         </View>
 
@@ -46,7 +46,7 @@ const Home = () => {
 };
 
 const styles = StyleSheet.create({
-    top: {flexDirection: 'column', padding: 35, gap: 20, backgroundColor:'#DAC0FC'},
+    top: {flexDirection: 'column', padding: 20, paddingTop:35, paddingBottom: 35, gap: 20, backgroundColor:'#DAC0FC'},
     bottom: {flexDirection: 'column', alignItems: 'center', padding: 20, gap: 1},
     header: { flexDirection: 'row', alignItems: 'center'},
     profileImage: { width: 80, height: 80, borderRadius: 40, borderColor: '#000000', borderWidth: 2 },
