@@ -4,11 +4,12 @@ import SignUp from './SignUp';
 import SignIn from './SignIn';
 import Challenge from './Challenge';
 import Rewards from './Rewards';
+import Journal from './Journal';
 
 export default function Page() {
   return (
     <View style={{ flex: 1 }}>
-      <Rewards/>
+      <Journal/>
     </View>
   );
 }
