@@ -1,4 +1,3 @@
-// page wrt the Figma --> 6
 import React, { useState } from 'react';
 import {
   StyleSheet,
@@ -8,6 +7,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  FlatList,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -15,6 +15,8 @@ import { useRouter } from 'expo-router';
 const Journal = () => {
   const [journalEntry, setJournalEntry] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState("What are you grateful for today?");
+  const [journalEntries, setJournalEntries] = useState([]); // State for journal entries
+  const [showEntries, setShowEntries] = useState(false); // State to toggle view
   const router = useRouter();
 
   const questions = [
@@ -36,50 +38,91 @@ const Journal = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Journal Entry:', journalEntry);
-    setJournalEntry('');
+    if (journalEntry.trim()) {
+      const newEntry = {
+        id: Date.now().toString(),
+        question: currentQuestion,
+        answer: journalEntry,
+        date: new Date().toLocaleString(),
+      };
+      setJournalEntries((prev) => [newEntry, ...prev]); // Add the new entry to the state
+      setJournalEntry(''); // Clear the input
+    }
   };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
-            <View style={styles.header}>
-                {/* <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-                    <Ionicons name="chevron-back" size={24} color="black" />
-                </TouchableOpacity> */}
-            </View>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          {/* Uncomment if back navigation is needed */}
+          {/* <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+            <Ionicons name="chevron-back" size={24} color="black" />
+          </TouchableOpacity> */}
+        </View>
+
         {/* Heading */}
-        <Text style={styles.title}>✍🏻Journal</Text>
-        {/* Subheading */}
+        <Text style={styles.title}>✍🏻 Journal</Text>
         <Text style={styles.subheading}>WRITE IT OUT, LET IT OUT!</Text>
-        
-            <View style={styles.content}>
-            {/* Question Box */}
+
+        {showEntries ? (
+          // View Previous Entries
+          <View style={styles.content}>
+            <Text style={styles.sectionTitle}>Previous Entries</Text>
+            {journalEntries.length === 0 ? (
+              <Text style={styles.noEntriesText}>No entries yet. Start journaling!</Text>
+            ) : (
+              <FlatList
+                data={journalEntries}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                  <View style={styles.entry}>
+                    <Text style={styles.entryDate}>{item.date}</Text>
+                    <Text style={styles.entryQuestion}>{item.question}</Text>
+                    <Text style={styles.entryAnswer}>{item.answer}</Text>
+                  </View>
+                )}
+              />
+            )}
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => setShowEntries(false)}
+            >
+              <Text style={styles.backButtonText}>Back to Journaling</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          // Journal Input Form
+          <View style={styles.content}>
             <View style={styles.questionBox}>
-            <Text style={styles.questionText}>{currentQuestion}</Text>
+              <Text style={styles.questionText}>{currentQuestion}</Text>
             </View>
 
-            {/* Journal Entry Input */}
             <TextInput
-            style={styles.journalInput}
-            placeholder="Write your thoughts here..."
-            multiline
-            value={journalEntry}
-            onChangeText={setJournalEntry}
+              style={styles.journalInput}
+              placeholder="Write your thoughts here..."
+              multiline
+              value={journalEntry}
+              onChangeText={setJournalEntry}
             />
 
-            {/* New Question Button */}
             <TouchableOpacity style={styles.newQuestionButton} onPress={handleNewQuestion}>
-            <Text style={styles.newQuestionButtonText}>Would you like another Question?</Text>
+              <Text style={styles.newQuestionButtonText}>Would you like another Question?</Text>
             </TouchableOpacity>
 
-            {/* Submit Button */}
             <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-            <Text style={styles.submitButtonText}>Save Journal</Text>
+              <Text style={styles.submitButtonText}>Save Journal</Text>
             </TouchableOpacity>
-        </View>
-        </View>
-    </TouchableWithoutFeedback>   
+
+            <TouchableOpacity
+              style={styles.viewEntriesButton}
+              onPress={() => setShowEntries(true)}
+            >
+              <Text style={styles.viewEntriesButtonText}>Show Previous Entries</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -88,27 +131,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F3E5F5',
     alignItems: 'center',
-    // justifyContent: 'center',
     justifyContent: 'flex-start',
     paddingTop: 50,
   },
   header: {
     flexDirection: 'row',
-    // alignItems: 'center',
     width: '100%',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    // position: 'absolute',
-    // marginTop: 20,
-  },
-  backButton: {
-    padding: 10,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#333',
-    // flex: 1,
     textAlign: 'center',
     marginTop: 15,
     marginBottom: 35,
@@ -168,8 +203,63 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     alignItems: 'center',
     width: '100%',
+    marginBottom: 16,
   },
   submitButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  viewEntriesButton: {
+    backgroundColor: '#673AB7',
+    borderRadius: 25,
+    paddingVertical: 16,
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: 16,
+  },
+  viewEntriesButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  entry: {
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 10,
+    width: '100%',
+  },
+  entryDate: {
+    fontSize: 12,
+    color: '#9E9E9E',
+    marginBottom: 4,
+  },
+  entryQuestion: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 8,
+  },
+  entryAnswer: {
+    fontSize: 14,
+    color: '#555',
+  },
+  noEntriesText: {
+    fontSize: 16,
+    color: '#9E9E9E',
+    textAlign: 'center',
+    marginTop: 20,
+  },
+  backButton: {
+    backgroundColor: '#9C27B0',
+    borderRadius: 25,
+    paddingVertical: 16,
+    alignItems: 'center',
+    width: '100%',
+    marginTop: 16,
+  },
+  backButtonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: '600',
