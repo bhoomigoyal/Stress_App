@@ -69,6 +69,16 @@ const StressDataForm = () => {
     }));
   };
 
+  const stressLevelMessages = {
+    3: 'Low stress: Your stress level is manageable. Maintain your current routine!',
+    4: 'Mild stress: Consider engaging in relaxation techniques or light exercise.',
+    5: 'Moderate stress: It’s a good idea to take breaks and practice mindfulness.',
+    6: 'High stress: Pay attention to your workload and prioritize self-care.',
+    7: 'Severe stress: It’s important to talk to someone or seek professional help.',
+    8: 'Critical stress: Immediate action is needed. Consult a healthcare professional.',
+  };
+  
+
   return (
     <ScrollView style={styles.container}>
       {!prediction ? (
@@ -100,16 +110,26 @@ const StressDataForm = () => {
           </View>
 
           <View style={styles.inputGroup}>
-            <Text style={styles.label}>Occupation (1-9)</Text>
-            <TextInput
-              style={styles.input}
-              value={formData.occupation}
-              onChangeText={(value) => handleInputChange('occupation', value)}
-              keyboardType="numeric"
-              placeholder="Enter occupation number"
-              placeholderTextColor="#9c9c9c"
-            />
-          </View>
+  <Text style={styles.label}>Occupation</Text>
+  <Picker
+    selectedValue={formData.occupation}
+    style={styles.picker}
+    onValueChange={(value) => handleInputChange('occupation', value)}
+  >
+    <Picker.Item label="Select Occupation" value="" />
+    <Picker.Item label="Scientist" value="0" />
+    <Picker.Item label="Doctor" value="1" />
+    <Picker.Item label="Accountant" value="2" />
+    <Picker.Item label="Teacher" value="3" />
+    <Picker.Item label="Manager" value="4" />
+    <Picker.Item label="Engineer" value="5" />
+    <Picker.Item label="Sales Representative" value="6" />
+    <Picker.Item label="Lawyer" value="8" />
+    <Picker.Item label="Salesperson" value="7" />
+    <Picker.Item label="Software Engineer" value="9" />
+    <Picker.Item label="Nurse" value="10" />
+  </Picker>
+</View>
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Sleep Duration (hours)</Text>
@@ -182,7 +202,9 @@ const StressDataForm = () => {
       ) : (
         <View style={styles.resultContainer}>
           <Text style={styles.resultTitle}>Prediction Result:</Text>
-          <Text style={styles.resultText}>Stress Level: {prediction}</Text>
+          <Text style={styles.resultText}>
+    {stressLevelMessages[prediction] || 'Unknown stress level: Please try again.'}
+  </Text>
           <TouchableOpacity
             style={styles.button}
             onPress={() => setPrediction(null)}
