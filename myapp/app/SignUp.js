@@ -34,10 +34,10 @@ const SignUp = () => {
   
     try {
       setLoading(true);
-      console.log('Attempting to connect to:', 'http://10.10.49.151:5001/api/signup');
-      console.log('With data:', userData);
+      console.log('Attempting to connect to:', 'http://10.10.233.226:5001/api/signup');
+      console.log('With data:', userData)
       
-      const response = await fetch('http://10.10.49.151:5001/api/signup', {
+      const response = await fetch('http://10.10.233.226:5001/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
