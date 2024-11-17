@@ -13,11 +13,11 @@ export default function Page() {
   return (
     <View style={{ flex: 1 }}>
       {/* <SignIn/> */}
-      {/* <Home /> */}
+      <Home />
       {/* <Journal /> */}
       {/* <Rewards /> */}
       {/* <Challenge /> */}
-      <StressDataForm/>
+      {/* <StressDataForm/> */}
       {/* <MoodTracker /> */}
     </View>
   );
