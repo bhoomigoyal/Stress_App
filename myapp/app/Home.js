@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, ScrollView, Platform, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Journal from './Journal'
+import StressDataForm from './StressDataForm'; 
+import HeatMap from '@ncuhomeclub/react-native-heatmap';
+import {data} from './stressLevelsData.js';
 
 const MOODS = [
   { emoji: '😊', label: 'Happy' },
@@ -34,6 +38,16 @@ const REWARDS = [
 ];
 
 const Home = () => {
+    const color = {
+                theme: '#7003ff',
+                opacitys: [
+                    { opacity: 0.2, limit: 2 },
+                    { opacity: 0.4, limit: 4 },
+                    { opacity: 0.6, limit: 6 },
+                    { opacity: 0.8, limit: 8 },
+                    { opacity: 1, limit: 10 },
+                ],
+            };
     const insets = useSafeAreaInsets();
     const [currentView, setCurrentView] = useState('home'); // 'home', 'mood', 'challenge', 'rewards'
     const [selectedActivity, setSelectedActivity] = useState(null);
@@ -64,9 +78,10 @@ const Home = () => {
             Alert.alert('Select Reward', 'Please select a reward first!');
             return;
         }
-        Alert.alert(
-            'Congratulations! 🎉',
-            You've completed "${ACTIVITIES[selectedActivity].label}" and earned: ${REWARDS[selectedReward].emoji} ${REWARDS[selectedReward].text}!,
+        //else{
+            Alert.alert(
+        'Congratulations! 🎉',
+    `You have completed ${ACTIVITIES[selectedActivity].label} and earned: ${REWARDS[selectedReward].emoji} ${REWARDS[selectedReward].text}!`,
             [
                 {
                     text: 'Done',
@@ -79,8 +94,15 @@ const Home = () => {
                 }
             ]
         );
+    //};
     };
-
+    if (currentView === 'journal') {
+        return <Journal onBack={() => setCurrentView('home')} />;
+    }
+    if (currentView === 'stressdata') {
+        return <StressDataForm onBack={() => setCurrentView('home')} />;
+    }
+    
     if (currentView === 'mood') {
         return (
             <View style={[styles.moodTrackerContainer, { paddingTop: insets.top }]}>
@@ -232,13 +254,16 @@ const Home = () => {
             <View style={styles.top}>
                 <View style={styles.header}>
                     <Image source={require('../assets/pfp.jpg')} style={styles.profileImage} />
-                    <Text style={styles.greeting}>Hi, Elina!</Text>
+                    <Text style={styles.greeting}>Hi, There!</Text>
                 </View>
-                <TextInput style={styles.searchInput} placeholder="Search anything..." />
             </View>
             <View style={styles.bottom}>
-                <Text style={styles.heading}>StessLevels at a Glance</Text>
+                <Text style={styles.title}>StessLevels at a Glance</Text>
+                <ScrollView horizontal={true} style={styles.calendarContainer}>
+                     <HeatMap style={styles.heatmap} data={data} color={color} xNumber={52} yNumber={7} direction="vertical" shape='circle' />
+                 </ScrollView>
                 <TouchableOpacity 
+
                     style={styles.button} 
                     onPress={() => setCurrentView('mood')}
                 >
@@ -250,15 +275,26 @@ const Home = () => {
                 >
                     <Text style={styles.buttonText}>Let's complete Challenge</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                {/* <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText}>Rewards</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                </TouchableOpacity> */}
+                <TouchableOpacity 
+                    style={styles.button}
+                    onPress={() => setCurrentView('journal')}
+                >
+                {/* <TouchableOpacity style={styles.button}> */}
                     <Text style={styles.buttonText}>Journal</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>measure your StessLevels</Text>
+                {/* <TouchableOpacity style={styles.button}>
+                    <Text style={styles.buttonText}>Measure your StessLevels</Text>
+                </TouchableOpacity> */}
+                <TouchableOpacity 
+                    style={styles.button}
+                    onPress={() => setCurrentView('stressdata')}
+                >
+                    <Text style={styles.buttonText}>Measure your StressLevels</Text>
                 </TouchableOpacity>
+
             </View>
         </ScrollView>
     );
@@ -268,6 +304,7 @@ const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
         backgroundColor: '#F3E5F5',
+        paddingTop: 50,
     },
     top: { 
         flexDirection: 'column', 
@@ -281,11 +318,17 @@ const styles = StyleSheet.create({
         padding: 20, 
         gap: 10 
     },
-    header: { 
-        flexDirection: 'row', 
-        alignItems: 'center',
+    // header: { 
+    //     flexDirection: 'row', 
+    //     alignItems: 'center',
+    //     paddingHorizontal: 20,
+    // },
+    header: {
+        flexDirection: 'row',
+        width: '100%',
         paddingHorizontal: 20,
-    },
+        paddingVertical: 10,
+      },
     profileImage: { 
         width: 80, 
         height: 80, 
@@ -294,7 +337,8 @@ const styles = StyleSheet.create({
         borderWidth: 2 
     },
     greeting: { 
-        fontSize: 24, 
+        fontSize: 24,
+        marginTop: 10, 
         fontWeight: '600', 
         marginLeft: 10, 
         color: '#4A4A4A' 
@@ -336,11 +380,33 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     subtitle: {
+        // paddingVertical: 10,
         fontSize: 16,
-        color: '#666',
+    color: '#9C27B0',
+    fontWeight: '600',
+    textAlign: 'center',
+    marginBottom: 30,
+    },
+    header: {
+        flexDirection: 'column',
+        padding: 10,
+        // backgroundColor: 'lightblue', // Temporary debug color
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#4A148C',
         textAlign: 'center',
-        marginHorizontal: 20,
-        marginTop: 20,
+        marginBottom: 8,
+        // backgroundColor: 'yellow', // Temporary debug color
+    },
+    subtitle: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#4A148C',
+        textAlign: 'center',
+        marginTop: 10,
+        // backgroundColor: 'lightgreen', // Temporary debug color
     },
     moodTrackerContainer: {
         flex: 1,
@@ -473,7 +539,13 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
         fontWeight: '600',
+        marginHorizontal: 20,
+        marginBottom: 20,
+        backgroundColor: '#9C27B0',
+        padding: 16,
+        borderRadius: 25,
+        textAlign: 'center',
     },
 });
 
-export default Home;   
+export default Home;

@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import {
   View,
@@ -10,8 +8,9 @@ import {
   ScrollView,
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { Ionicons } from '@expo/vector-icons';
 
-const StressDataForm = () => {
+const StressDataForm = ({ onBack }) => {
   const [formData, setFormData] = useState({
     gender: '1', // 1 for Male, 2 for Female
     age: '',
@@ -28,7 +27,7 @@ const StressDataForm = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://10.10.235.125:5000/predict', {
+      const response = await fetch('http://10.10.237.24:5000/predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +45,7 @@ const StressDataForm = () => {
       });
 
       if (!response.ok) {
-        setError(`Error: ${response.status}`);
+        setError('Error: ${response.status}');
         return;
       }
 
@@ -81,6 +80,12 @@ const StressDataForm = () => {
 
   return (
     <ScrollView style={styles.container}>
+        <TouchableOpacity 
+          style={styles.backButton} 
+          onPress={onBack}
+        >
+          <Ionicons name="chevron-back" size={24} color="black" />
+        </TouchableOpacity>
       {!prediction ? (
         <>
           <Text style={styles.title}>Stress Level Prediction</Text>
@@ -284,6 +289,17 @@ const styles = StyleSheet.create({
   resultText: {
     fontSize: 18,
     color: '#6b21a8',
+  },
+  // backButton: {
+  //   padding: 16,
+  // },
+  backButton: {
+    // backgroundColor: '#9C27B0',
+    borderRadius: 25,
+    paddingVertical: 16,
+    alignItems: 'left',
+    width: '100%',
+    marginTop: 16,
   },
 });
 

@@ -14,7 +14,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
-const Journal = () => {
+const Journal = ({ onBack }) => {
   const [journalEntry, setJournalEntry] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState("What are you grateful for today?");
   const [journalEntries, setJournalEntries] = useState([]); // State for journal entries
@@ -60,6 +60,11 @@ const Journal = () => {
           {/* <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
             <Ionicons name="chevron-back" size={24} color="black" />
           </TouchableOpacity> */}
+          {onBack && (
+            <TouchableOpacity style={styles.backButton} onPress={onBack}>
+              <Ionicons name="chevron-back" size={24} color="black" />
+            </TouchableOpacity>
+          )}
         </View>
 
         {/* Heading */}
@@ -254,10 +259,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   backButton: {
-    backgroundColor: '#9C27B0',
+    // backgroundColor: '#9C27B0',
     borderRadius: 25,
     paddingVertical: 16,
-    alignItems: 'center',
+    alignItems: 'left',
     width: '100%',
     marginTop: 16,
   },
