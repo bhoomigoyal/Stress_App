@@ -5,19 +5,22 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Journal from './Journal'
 import StressDataForm from './StressDataForm'; 
 import HeatMap from '@ncuhomeclub/react-native-heatmap';
+import MoodTracker from './mood_tracker.js';  // Import the new MoodTracker component
 import {data} from './stressLevelsData.js';
 
-const MOODS = [
-  { emoji: '😊', label: 'Happy' },
-  { emoji: '😌', label: 'Relaxed' },
-  { emoji: '🙂', label: 'Okay' },
-  { emoji: '😔', label: 'Sad' },
-  { emoji: '😐', label: 'Neutral' },
-  { emoji: '😩', label: 'Tired' },
-  { emoji: '😄', label: 'Excited' },
-  { emoji: '😴', label: 'Sleepy' },
-  { emoji: '😠', label: 'Angry' },
-];
+
+
+// const MOODS = [
+//   { emoji: '😊', label: 'Happy' },
+//   { emoji: '😌', label: 'Relaxed' },
+//   { emoji: '🙂', label: 'Okay' },
+//   { emoji: '😔', label: 'Sad' },
+//   { emoji: '😐', label: 'Neutral' },
+//   { emoji: '😩', label: 'Tired' },
+//   { emoji: '😄', label: 'Excited' },
+//   { emoji: '😴', label: 'Sleepy' },
+//   { emoji: '😠', label: 'Angry' },
+// ];
 
 const ACTIVITIES = [
   { label: 'Meditate' },
@@ -104,58 +107,8 @@ const Home = () => {
     }
     
     if (currentView === 'mood') {
-        return (
-            <View style={[styles.moodTrackerContainer, { paddingTop: insets.top }]}>
-                <TouchableOpacity 
-                    style={styles.backButton} 
-                    onPress={() => setCurrentView('home')}
-                >
-                    <Ionicons name="chevron-back" size={24} color="black" />
-                </TouchableOpacity>
-
-                <View style={styles.header}>
-                    <Text style={styles.title}>Let's Track Your Mood !</Text>
-                    <Text style={styles.subtitle}>How are you feeling today?</Text>
-                </View>
-
-                <ScrollView 
-                    style={styles.scrollView}
-                    contentContainerStyle={styles.moodGrid}
-                >
-                    {MOODS.map((mood, index) => (
-                        <TouchableOpacity 
-                            key={index} 
-                            style={[
-                                styles.moodCard,
-                                selectedMood === index && styles.selectedMoodCard
-                            ]}
-                            onPress={() => setSelectedMood(index)}
-                        >
-                            <Text style={styles.moodEmoji}>{mood.emoji}</Text>
-                            <Text style={styles.moodLabel}>{mood.label}</Text>
-                        </TouchableOpacity>
-                    ))}
-                </ScrollView>
-
-                <TouchableOpacity 
-                    style={[
-                        styles.recordButton,
-                        selectedMood === null && styles.disabledButton
-                    ]}
-                    disabled={selectedMood === null}
-                    onPress={() => {
-                        if (selectedMood !== null) {
-                            console.log('Selected mood:', MOODS[selectedMood].label);
-                            setCurrentView('home');
-                        }
-                    }}
-                >
-                    <Text style={styles.recordButtonText}>
-                        Let us Record it on the Heatmap!
-                    </Text>
-                </TouchableOpacity>
-            </View>
-        );
+        return <MoodTracker onBack={() => setCurrentView('home')} />;
+ 
     }
 
     if (currentView === 'challenge') {
