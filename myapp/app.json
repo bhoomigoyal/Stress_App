@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "myapp",
+    "name": "StressLess",
     "slug": "myapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,13 +21,22 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.hellosisterwhatsup.myapp"
     },
     "scheme": "myapp",
     "main": "expo-router/entry",
     "plugins": [
       "expo-font",
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "abf0b7ab-3175-46e1-b751-9cf2e44c9eb1"
+      }
+    }
   }
 }

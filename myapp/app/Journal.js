@@ -68,7 +68,7 @@ const Journal = ({ onBack }) => {
         </View>
 
         {/* Heading */}
-        <Text style={styles.title}>✍🏻 Journal</Text>
+        <Text style={styles.title}>✍🏻 Let's Journal!</Text>
         <Text style={styles.subheading}>WRITE IT OUT, LET IT OUT!</Text>
 
         {showEntries ? (
@@ -112,12 +112,12 @@ const Journal = ({ onBack }) => {
               onChangeText={setJournalEntry}
             />
 
-            <TouchableOpacity style={styles.newQuestionButton} onPress={handleNewQuestion}>
-              <Text style={styles.newQuestionButtonText}>Would you like another Question?</Text>
-            </TouchableOpacity>
-
             <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
               <Text style={styles.submitButtonText}>Save Journal</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.newQuestionButton} onPress={handleNewQuestion}>
+              <Text style={styles.newQuestionButtonText}>Would you like another Question?</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -138,29 +138,29 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F3E5F5',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    paddingTop: 50,
+    // justifyContent: 'flex-start',
+    // padding: 20,
   },
   header: {
     flexDirection: 'row',
     width: '100%',
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    // paddingVertical: 5,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#4A148C',
     textAlign: 'center',
-    marginTop: 15,
-    marginBottom: 35,
+    // marginTop: 10,
+    marginBottom: 10,
   },
   subheading: {
     fontSize: 16,
-    color: '#9C27B0',
+    color: '#4A148C',
     fontWeight: '600',
     textAlign: 'center',
-    marginBottom: 30,
+    marginBottom: 10,
   },
   content: {
     width: '90%',
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   questionBox: {
-    backgroundColor: '#9C27B0',
+    backgroundColor: 'rgba(74, 20, 140, 1)',
     borderRadius: 20,
     paddingVertical: 16,
     paddingHorizontal: 24,
@@ -177,9 +177,11 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   questionText: {
-    fontSize: 16,
-    color: 'white',
+    fontSize: 18,
+    fontWeight: 800,
     textAlign: 'center',
+    // color: 'rgba(74, 20, 140, 1)',
+    color: 'white',
   },
   journalInput: {
     backgroundColor: 'white',
@@ -192,7 +194,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   newQuestionButton: {
-    backgroundColor: '#d564e8',
+    backgroundColor: 'rgba(74, 20, 140, 0.8)',
     borderRadius: 25,
     paddingVertical: 16,
     alignItems: 'center',
@@ -205,7 +207,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   submitButton: {
-    backgroundColor: '#9C27B0',
+    backgroundColor: 'rgba(74, 20, 140, 1)',
+
     borderRadius: 25,
     paddingVertical: 16,
     alignItems: 'center',
@@ -218,7 +221,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   viewEntriesButton: {
-    backgroundColor: '#673AB7',
+    backgroundColor: 'rgba(74, 20, 140, 0.7)',
+    
     borderRadius: 25,
     paddingVertical: 16,
     alignItems: 'center',

@@ -68,13 +68,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#4A148C',
+    color: '#DAC0FC',
     textAlign: 'center',
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: '#666',
+    color: '#DAC0FC',
     textAlign: 'center',
   },
   activitiesGrid: {
@@ -100,13 +100,13 @@ const styles = StyleSheet.create({
   activityLabel: {
     fontSize: 18, // Increased font size
     fontWeight: 'bold', // Made text bold
-    color: '#4A148C',
+    color: '#DAC0FC',
     textAlign: 'center',
   },
   nextButton: {
     marginHorizontal: 20,
     marginBottom: 20,
-    backgroundColor: '#9C27B0',
+    backgroundColor: '#DAC0FC',
     padding: 16,
     borderRadius: 25,
     alignItems: 'center',

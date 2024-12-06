@@ -151,7 +151,7 @@ const Home = () => {
                     }}
                 >
                     <Text style={styles.recordButtonText}>
-                        Let us record it on heatmap
+                        Let us Record it on the Heatmap!
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -169,7 +169,7 @@ const Home = () => {
                 </TouchableOpacity>
 
                 <View style={styles.header}>
-                    <Text style={styles.title}>Let's complete Challenge</Text>
+                    <Text style={styles.title}>Let's Complete a Challenge!</Text>
                     <Text style={styles.subtitle}>
                         Spend all of it and bring your current anxiety level down to an ideal level before the day ends
                     </Text>
@@ -252,10 +252,8 @@ const Home = () => {
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.top}>
-                <View style={styles.header}>
-                    <Image source={require('../assets/pfp.jpg')} style={styles.profileImage} />
-                    <Text style={styles.greeting}>Hi, There!</Text>
-                </View>
+                <Image source={require('../assets/pfp.jpg')} style={styles.profileImage} />
+                <Text style={styles.greeting}>Hi, There!</Text>
             </View>
             <View style={styles.bottom}>
                 <Text style={styles.title}>StessLevels at a Glance</Text>
@@ -273,7 +271,7 @@ const Home = () => {
                     style={styles.button}
                     onPress={() => setCurrentView('challenge')}
                 >
-                    <Text style={styles.buttonText}>Let's complete Challenge</Text>
+                    <Text style={styles.buttonText}>Let's Complete a Challenge!</Text>
                 </TouchableOpacity>
                 {/* <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText}>Rewards</Text>
@@ -283,7 +281,7 @@ const Home = () => {
                     onPress={() => setCurrentView('journal')}
                 >
                 {/* <TouchableOpacity style={styles.button}> */}
-                    <Text style={styles.buttonText}>Journal</Text>
+                    <Text style={styles.buttonText}>Let's Journal!</Text>
                 </TouchableOpacity>
                 {/* <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText}>Measure your StessLevels</Text>
@@ -292,7 +290,7 @@ const Home = () => {
                     style={styles.button}
                     onPress={() => setCurrentView('stressdata')}
                 >
-                    <Text style={styles.buttonText}>Measure your StressLevels</Text>
+                    <Text style={styles.buttonText}>Measure your Stress Level!</Text>
                 </TouchableOpacity>
 
             </View>
@@ -304,31 +302,23 @@ const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
         backgroundColor: '#F3E5F5',
-        paddingTop: 50,
     },
     top: { 
-        flexDirection: 'column', 
+        flexDirection: 'row', 
+        alignItems: 'center',
         padding: 20, 
         gap: 20, 
-        backgroundColor: '#DAC0FC' 
+        backgroundColor: '#DAC0FC',
     },
     bottom: { 
         flexDirection: 'column', 
         alignItems: 'center', 
         padding: 20, 
-        gap: 10 
+        gap: 12 
     },
-    // header: { 
-    //     flexDirection: 'row', 
-    //     alignItems: 'center',
-    //     paddingHorizontal: 20,
-    // },
-    header: {
-        flexDirection: 'row',
-        width: '100%',
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-      },
+    calendarContainer : {
+        marginBottom: 10,
+    },
     profileImage: { 
         width: 80, 
         height: 80, 
@@ -340,8 +330,8 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginTop: 10, 
         fontWeight: '600', 
-        marginLeft: 10, 
-        color: '#4A4A4A' 
+        marginLeft: 0, 
+        color: '#000000' 
     },
     searchInput: { 
         backgroundColor: '#FFF', 
@@ -382,15 +372,10 @@ const styles = StyleSheet.create({
     subtitle: {
         // paddingVertical: 10,
         fontSize: 16,
-    color: '#9C27B0',
-    fontWeight: '600',
-    textAlign: 'center',
-    marginBottom: 30,
-    },
-    header: {
-        flexDirection: 'column',
-        padding: 10,
-        // backgroundColor: 'lightblue', // Temporary debug color
+        color: '#9C27B0',
+        fontWeight: '600',
+        textAlign: 'center',
+        marginBottom: 30,
     },
     title: {
         fontSize: 24,
@@ -419,7 +404,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        padding: 16,
+        padding: 20,
     },
     moodCard: {
         width: '28%',
@@ -444,7 +429,7 @@ const styles = StyleSheet.create({
     selectedMoodCard: {
         backgroundColor: '#E1BEE7',
         borderWidth: 2,
-        borderColor: '#9C27B0',
+        borderColor: '#4A148C',
     },
     moodEmoji: {
         fontSize: 32,
@@ -452,14 +437,18 @@ const styles = StyleSheet.create({
     },
     moodLabel: {
         fontSize: 12,
-        color: '#666',
+        color: '#4A148C',
         marginTop: 4,
+    },
+    header : {
+        padding: 20
     },
     activitiesGrid: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
         padding: 16,
+        // border: '1px solid green',
     },
     activityCard: {
         width: '40%',
@@ -484,7 +473,7 @@ const styles = StyleSheet.create({
     selectedCard: {
         backgroundColor: '#E1BEE7',
         borderWidth: 2,
-        borderColor: '#9C27B0',
+        borderColor: '#4A148C',
     },
     checkmark: {
         position: 'absolute',
@@ -511,7 +500,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         marginBottom: 10,
         borderWidth: 1,
-        borderColor: '#E0E0E0',
+        borderColor: '#4A148C',
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -522,13 +511,10 @@ const styles = StyleSheet.create({
     nextButton: {
         marginHorizontal: 20,
         marginBottom: 20,
-        backgroundColor: '#9C27B0',
+        backgroundColor: '#4A148C',
         padding: 16,
         borderRadius: 25,
         alignItems: 'center',
-    },
-    disabledButton: {
-        backgroundColor: '#D1C4E9',
     },
     nextButtonText: {
         color: 'white',
@@ -541,7 +527,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         marginHorizontal: 20,
         marginBottom: 20,
-        backgroundColor: '#9C27B0',
+        backgroundColor: '#4A148C',
         padding: 16,
         borderRadius: 25,
         textAlign: 'center',

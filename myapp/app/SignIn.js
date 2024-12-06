@@ -18,7 +18,7 @@ const SignIn = () => {
     }
 
     try {
-      const response = await fetch('http://10.10.233.226:5001/api/login', {
+      const response = await fetch('http://10.10.236.149:5001/api/login', {
         method: 'POST',  // Changed from 'GET' to 'POST'
         headers: {
           'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ const SignIn = () => {
       if (response.ok) {
         Alert.alert('Success', 'Login successful!');
         console.log('Login data:', data); // Handle token or user data if necessary
-        router.push('/Home'); // Navigate to Home or anot.15her relevant page
+        router.push('/Home'); // Navigate to Home or another relevant page
       } else {
         Alert.alert('Error', data.message || 'Invalid credentials');
       }

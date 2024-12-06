@@ -27,7 +27,7 @@ const StressDataForm = ({ onBack }) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://10.10.237.24:5000/predict', {
+      const response = await fetch('http://10.10.237.165:5000/predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -76,20 +76,18 @@ const StressDataForm = ({ onBack }) => {
     7: 'Severe stress: It’s important to talk to someone or seek professional help.',
     8: 'Critical stress: Immediate action is needed. Consult a healthcare professional.',
   };
-  
 
   return (
     <ScrollView style={styles.container}>
-        <TouchableOpacity 
-          style={styles.backButton} 
-          onPress={onBack}
-        >
-          <Ionicons name="chevron-back" size={24} color="black" />
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.backButton} onPress={onBack}>
+        <Ionicons name="chevron-back" size={24} color="black" />
+      </TouchableOpacity>
+
       {!prediction ? (
         <>
           <Text style={styles.title}>Stress Level Prediction</Text>
 
+          {/* Gender Input */}
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Gender</Text>
             <Picker
@@ -102,6 +100,7 @@ const StressDataForm = ({ onBack }) => {
             </Picker>
           </View>
 
+          {/* Age Input */}
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Age</Text>
             <TextInput
@@ -114,28 +113,30 @@ const StressDataForm = ({ onBack }) => {
             />
           </View>
 
+          {/* Occupation Input */}
           <View style={styles.inputGroup}>
-  <Text style={styles.label}>Occupation</Text>
-  <Picker
-    selectedValue={formData.occupation}
-    style={styles.picker}
-    onValueChange={(value) => handleInputChange('occupation', value)}
-  >
-    <Picker.Item label="Select Occupation" value="" />
-    <Picker.Item label="Scientist" value="0" />
-    <Picker.Item label="Doctor" value="1" />
-    <Picker.Item label="Accountant" value="2" />
-    <Picker.Item label="Teacher" value="3" />
-    <Picker.Item label="Manager" value="4" />
-    <Picker.Item label="Engineer" value="5" />
-    <Picker.Item label="Sales Representative" value="6" />
-    <Picker.Item label="Lawyer" value="8" />
-    <Picker.Item label="Salesperson" value="7" />
-    <Picker.Item label="Software Engineer" value="9" />
-    <Picker.Item label="Nurse" value="10" />
-  </Picker>
-</View>
+            <Text style={styles.label}>Occupation</Text>
+            <Picker
+              selectedValue={formData.occupation}
+              style={styles.picker}
+              onValueChange={(value) => handleInputChange('occupation', value)}
+            >
+              <Picker.Item label="Select Occupation" value="" />
+              <Picker.Item label="Scientist" value="0" />
+              <Picker.Item label="Doctor" value="1" />
+              <Picker.Item label="Accountant" value="2" />
+              <Picker.Item label="Teacher" value="3" />
+              <Picker.Item label="Manager" value="4" />
+              <Picker.Item label="Engineer" value="5" />
+              <Picker.Item label="Sales Representative" value="6" />
+              <Picker.Item label="Lawyer" value="8" />
+              <Picker.Item label="Salesperson" value="7" />
+              <Picker.Item label="Software Engineer" value="9" />
+              <Picker.Item label="Nurse" value="10" />
+            </Picker>
+          </View>
 
+          {/* Sleep Duration Input */}
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Sleep Duration (hours)</Text>
             <TextInput
@@ -148,6 +149,7 @@ const StressDataForm = ({ onBack }) => {
             />
           </View>
 
+          {/* BMI Category Input */}
           <View style={styles.inputGroup}>
             <Text style={styles.label}>BMI Category</Text>
             <Picker
@@ -162,6 +164,7 @@ const StressDataForm = ({ onBack }) => {
             </Picker>
           </View>
 
+          {/* Heart Rate Input */}
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Heart Rate (bpm)</Text>
             <TextInput
@@ -174,6 +177,7 @@ const StressDataForm = ({ onBack }) => {
             />
           </View>
 
+          {/* Daily Steps Input */}
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Daily Steps</Text>
             <TextInput
@@ -186,6 +190,7 @@ const StressDataForm = ({ onBack }) => {
             />
           </View>
 
+          {/* Systolic BP Input */}
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Systolic BP</Text>
             <TextInput
@@ -198,18 +203,20 @@ const StressDataForm = ({ onBack }) => {
             />
           </View>
 
+          {/* Submit Button */}
           <TouchableOpacity style={styles.button} onPress={handleSubmit}>
             <Text style={styles.buttonText}>Predict Stress Level</Text>
           </TouchableOpacity>
 
+          {/* Error Message */}
           {error && <Text style={styles.error}>{error}</Text>}
         </>
       ) : (
         <View style={styles.resultContainer}>
           <Text style={styles.resultTitle}>Prediction Result:</Text>
           <Text style={styles.resultText}>
-    {stressLevelMessages[prediction] || 'Unknown stress level: Please try again.'}
-  </Text>
+            {stressLevelMessages[prediction] || 'Unknown stress level: Please try again.'}
+          </Text>
           <TouchableOpacity
             style={styles.button}
             onPress={() => setPrediction(null)}
@@ -225,13 +232,13 @@ const StressDataForm = ({ onBack }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9f5ff',
+    backgroundColor: '#f3e5f5',
     padding: 20,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#4c1d95',
+    color: 'rgba(74, 20, 140, 1)',
     textAlign: 'center',
     marginBottom: 20,
   },
@@ -240,13 +247,13 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    color: '#4c1d95',
+    color: 'rgba(74, 20, 140, 1)',
     marginBottom: 5,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#c4b5fd',
-    borderRadius: 8,
+    borderColor: 'rgba(74, 20, 140, 1)',
+    borderRadius: 10,
     padding: 10,
     fontSize: 16,
     backgroundColor: '#fff',
@@ -254,17 +261,18 @@ const styles = StyleSheet.create({
   },
   picker: {
     borderWidth: 1,
-    borderColor: '#c4b5fd',
-    borderRadius: 8,
+    borderColor: 'rgba(74, 20, 140, 1)',
+    borderRadius: 10,
     backgroundColor: '#fff',
-    color: '#4c1d95',
+    color: 'rgba(74, 20, 140, 1)',
   },
   button: {
-    backgroundColor: '#8b5cf6',
+    backgroundColor: 'rgba(74, 20, 140, 1)',
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
-    marginTop: 20,
+    margin: 20,
+    marginBottom: 40,
   },
   buttonText: {
     color: '#fff',
@@ -272,7 +280,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   error: {
-    color: '#f43f5e',
+    color: 'rgba(74, 20, 140, 1)',
     marginTop: 10,
     textAlign: 'center',
   },
@@ -290,16 +298,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#6b21a8',
   },
-  // backButton: {
-  //   padding: 16,
-  // },
   backButton: {
-    // backgroundColor: '#9C27B0',
-    borderRadius: 25,
     paddingVertical: 16,
     alignItems: 'left',
     width: '100%',
-    marginTop: 16,
   },
 });
 

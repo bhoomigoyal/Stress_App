@@ -102,5 +102,5 @@ app.use('/api', require('./routes/auth'));
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
-    console.log(`Full server URL: http://10.10.233.226:${PORT}`);
+    console.log(`Full server URL: http://10.10.237.165:${PORT}`);
 });

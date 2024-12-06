@@ -1,4 +1,3 @@
-// page wrt the Figma --> 5
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -36,16 +35,13 @@ const MoodTracker = () => {
       </View>
 
       {/* Mood Grid */}
-      <ScrollView 
-        style={styles.scrollView}
-        contentContainerStyle={styles.moodGrid}
-      >
+      <ScrollView style={styles.scrollView} contentContainerStyle={styles.moodGrid}>
         {MOODS.map((mood, index) => (
-          <TouchableOpacity 
-            key={index} 
+          <TouchableOpacity
+            key={index}
             style={[
               styles.moodCard,
-              selectedMood === index && styles.selectedMoodCard
+              selectedMood === index && styles.selectedMoodCard,
             ]}
             onPress={() => setSelectedMood(index)}
           >
@@ -56,10 +52,10 @@ const MoodTracker = () => {
       </ScrollView>
 
       {/* Record Button */}
-      <TouchableOpacity 
+      <TouchableOpacity
         style={[
           styles.recordButton,
-          selectedMood === null && styles.disabledButton
+          selectedMood === null && styles.disabledButton,
         ]}
         disabled={selectedMood === null}
         onPress={() => {
@@ -69,9 +65,7 @@ const MoodTracker = () => {
           }
         }}
       >
-        <Text style={styles.recordButtonText}>
-          Let us record it on heatmap
-        </Text>
+        <Text style={styles.recordButtonText}>Let us Record it on Heatmap!</Text>
       </TouchableOpacity>
     </View>
   );
@@ -80,7 +74,7 @@ const MoodTracker = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F3E5F5',
+    backgroundColor: '#F3e5f5',
   },
   scrollView: {
     flex: 1,
@@ -95,11 +89,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 8,
-    color: '#333',
+    color: '#DAC0FC',
   },
   subtitle: {
     fontSize: 16,
-    color: '#666',
+    color: '#DAC0FC',
   },
   moodGrid: {
     flexDirection: 'row',
@@ -128,7 +122,7 @@ const styles = StyleSheet.create({
     }),
   },
   selectedMoodCard: {
-    backgroundColor: '#E1BEE7',
+    backgroundColor: '#DAC0FC',
     borderWidth: 2,
     borderColor: '#9C27B0',
   },
@@ -144,13 +138,13 @@ const styles = StyleSheet.create({
   recordButton: {
     marginHorizontal: 20,
     marginBottom: 20,
-    backgroundColor: '#9C27B0',
+    backgroundColor: '#DAC0FC',
     padding: 16,
     borderRadius: 25,
     alignItems: 'center',
   },
   disabledButton: {
-    backgroundColor: '#D1C4E9',
+    backgroundColor: '#DAC0FC',
   },
   recordButtonText: {
     color: 'white',

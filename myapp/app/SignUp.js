@@ -34,10 +34,10 @@ const SignUp = () => {
   
     try {
       setLoading(true);
-      console.log('Attempting to connect to:', 'http://10.10.233.226:5001/api/signup');
-      console.log('With data:', userData)
+      console.log('Attempting to connect to:', 'http://10.10.237.165:5001/api/signup');
+      console.log('With data:', userData);
       
-      const response = await fetch('http://10.10.233.226:5001/api/signup', {
+      const response = await fetch('http://10.10.237.165:5001/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,6 +55,7 @@ const SignUp = () => {
         router.push('/Home');
       } else {
         Alert.alert('Error', data.message || `Server error: ${response.status}`);
+
       }
     } catch (error) {
       console.error('Detailed error:', error);
