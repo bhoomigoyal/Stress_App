@@ -9,8 +9,9 @@ import {
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Ionicons } from '@expo/vector-icons';
+import ChallengePage from './Challenge';
 
-const StressDataForm = ({ onBack }) => {
+const StressDataForm = ({ onBack, onStartChallenge }) => {
   const [formData, setFormData] = useState({
     gender: '1', // 1 for Male, 2 for Female
     age: '',
@@ -24,40 +25,73 @@ const StressDataForm = ({ onBack }) => {
 
   const [prediction, setPrediction] = useState(null);
   const [error, setError] = useState(null);
+  // const [selectedChallenges, setSelectedChallenges] = useState(null);
+  const [challenges, setChallenges] = useState(null);
 
-  const handleSubmit = async () => {
-    try {
-      const response = await fetch('http://10.10.237.165:5000/predict', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          gender: parseInt(formData.gender),
-          age: parseInt(formData.age),
-          occupation: parseInt(formData.occupation),
-          sleep_duration: parseFloat(formData.sleep_duration),
-          bmi_category: parseInt(formData.bmi_category),
-          heart_rate: parseInt(formData.heart_rate),
-          daily_steps: parseInt(formData.daily_steps),
-          systolic_bp: parseInt(formData.systolic_bp),
-        }),
-      });
 
-      if (!response.ok) {
-        setError('Error: ${response.status}');
-        return;
-      }
+  const handleSubmit = async () => {const sleepDuration = parseFloat(formData.sleep_duration);
 
-      const result = await response.json();
-      if (result.status === 'success') {
-        setPrediction(result.prediction[0]);
-        setError(null);
-      } else {
-        setError(result.message);
-      }
-    } catch (err) {
-      setError('Failed to connect to the server');
+    if (!formData.age || !formData.occupation || !formData.sleep_duration || !formData.heart_rate || !formData.daily_steps || !formData.systolic_bp) {
+      setError('Please fill in all fields before predicting.');
+      return;
+    }
+  
+    // Prediction logic based on sleep duration
+    // if (sleepDuration < 2) {
+    //   setPrediction(8);
+    // } else if (sleepDuration >= 2 && sleepDuration < 4) {
+    //   setPrediction(7);
+    // } else if (sleepDuration >= 4 && sleepDuration < 6) {
+    //   setPrediction(6);
+    // } else if (sleepDuration >= 8) {
+    //   setPrediction(4);
+    // } else {
+    //   setPrediction(3);
+    // }
+    if (sleepDuration < 2 || formData.heart_rate > 100 || formData.systolic_bp > 140) {
+      setPrediction(8); // Critical stress
+    } else if (
+      (sleepDuration >= 2 && sleepDuration < 4) || 
+      (formData.heart_rate > 90 && formData.heart_rate <= 100) ||  
+      (formData.systolic_bp > 130 && formData.systolic_bp <= 140)
+    ) {
+      setPrediction(7); // Severe stress
+    } else if (
+      (sleepDuration >= 4 && sleepDuration < 6) || 
+      (formData.heart_rate > 80 && formData.heart_rate <= 90) ||  
+      (formData.systolic_bp > 120 && formData.systolic_bp <= 130)
+    ) {
+      setPrediction(6); // High stress
+    } else if (
+      (sleepDuration >= 6 && sleepDuration < 8) || 
+      (formData.heart_rate > 70 && formData.heart_rate <= 80) || 
+      (formData.systolic_bp > 110 && formData.systolic_bp <= 120)
+    ) {
+      setPrediction(5); // Moderate stress
+    } else if (
+      sleepDuration >= 8 && 
+      formData.heart_rate <= 70 && 
+      formData.daily_steps >= 10000 && 
+      formData.systolic_bp <= 110
+    ) {
+      setPrediction(3); // Low stress
+    } else {
+      setPrediction(4); // Mild stress as a fallback
+    }
+    
+  
+    setError(null); // Clear any existing errors
+  };
+
+  const handleStartChallenges = () => {
+    if (prediction) {
+      const selectedChallenges = STRESS_ACTIVITIES[prediction];
+      setChallenges(selectedChallenges);
+      onStartChallenge(selectedChallenges);
+      // navigation.navigate('ChallengePage', { 
+      //   challenges: selectedChallenges 
+      // });
+      // return <ChallengePage  challenges={selectedChallenges} onComplete={onBack}/>// Notify parent component to switch views
     }
   };
 
@@ -76,7 +110,39 @@ const StressDataForm = ({ onBack }) => {
     7: 'Severe stress: It’s important to talk to someone or seek professional help.',
     8: 'Critical stress: Immediate action is needed. Consult a healthcare professional.',
   };
-
+  const STRESS_ACTIVITIES = {
+    3: [
+      { label: 'Meditate', intensity: 'Low' },
+      { label: 'Listen to Calm Music', intensity: 'Low' },
+      { label: 'Light Stretching', intensity: 'Low' }
+    ],
+    4: [
+      { label: 'Guided Meditation', intensity: 'Mild' },
+      { label: 'Nature Walk', intensity: 'Mild' },
+      { label: 'Journaling', intensity: 'Mild' }
+    ],
+    5: [
+      { label: 'Progressive Muscle Relaxation', intensity: 'Moderate' },
+      { label: 'Yoga Session', intensity: 'Moderate' },
+      { label: 'Deep Breathing Exercises', intensity: 'Moderate' }
+    ],
+    6: [
+      { label: 'Therapy Consultation', intensity: 'High' },
+      { label: 'Intense Exercise', intensity: 'High' },
+      { label: 'Mindfulness Exercises (Deep Breathing)', intensity: 'High' }
+    ],
+    7: [
+      { label: 'Professional Counseling', intensity: 'Severe' },
+      { label: 'Stress Management Seminar', intensity: 'Severe' },
+      { label: 'Freinds/Family Time', intensity: 'Severe' }
+    ],
+    8: [
+      { label: 'Reaching out to Therapist', intensity: 'Critical' },
+      { label: 'Deep Breathing Exercises', intensity: 'Critical' },
+      { label: 'Yoga Session', intensity: 'Critical' }
+    ]
+  };
+  
   return (
     <ScrollView style={styles.container}>
       <TouchableOpacity style={styles.backButton} onPress={onBack}>
@@ -217,12 +283,26 @@ const StressDataForm = ({ onBack }) => {
           <Text style={styles.resultText}>
             {stressLevelMessages[prediction] || 'Unknown stress level: Please try again.'}
           </Text>
+
           <TouchableOpacity
+            style={styles.button}
+            onPress={handleStartChallenges}
+          >
+            <Text style={styles.buttonText}>Try Stress Management Activities</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.secondaryButton}
+            onPress={() => setPrediction(null)}
+          >
+            <Text style={styles.secondaryButtonText}>Retake Test</Text>
+          </TouchableOpacity>
+          {/* <TouchableOpacity
             style={styles.button}
             onPress={() => setPrediction(null)}
           >
             <Text style={styles.buttonText}>Go Back</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       )}
     </ScrollView>

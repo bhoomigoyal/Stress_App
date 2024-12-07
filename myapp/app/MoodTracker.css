@@ -1,137 +1,139 @@
 /* General container styling */
 .mood-tracker {
-  background-color: #f6e7ff; /* Light purple background */
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 800px;
-  margin: auto;
-  font-family: 'Arial', sans-serif;
+    background-color: #f6e7ff; /* Light purple background */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    font-family: 'Arial', sans-serif;
 }
 
 /* Header styling */
 .mood-header h1 {
-  font-size: 28px;
-  color: #3c1d78; /* Dark purple */
-  margin-bottom: 10px;
-  font-weight: bold;
+    font-size: 28px;
+    color: #3c1d78; /* Dark purple */
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .mood-header p {
-  font-size: 18px;
-  color: #6c4fdd; /* Medium purple */
+    font-size: 18px;
+    color: #6c4fdd; /* Medium purple */
 }
 
 /* Mood buttons container */
 .mood-buttons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 10px;
-  margin-top: 10px;
-  justify-content: center; /* Center align the grid */
-  padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three buttons per row */
+    gap: 20px; /* Adjusted space between buttons */
+    margin-top: 30px;
+    justify-content: center; /* Center-align the buttons */
+    padding: 10px;
 }
 
 /* Mood button styling */
 .mood-button {
-  background-color: #ffffff; /* White background */
-  border: none;
-  border-radius: 12px;
-  padding: 15px;
-  font-size: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: auto;
+    background: linear-gradient(145deg, #ffffff, #dcd0ff); /* Gradient background */
+    border: 1px solid #b8a1f2; /* Light border */
+    border-radius: 12px;
+    padding: 15px 20px; /* Adjusted padding for better appearance */
+    font-size: 24px; /* Slightly smaller font size */
+    color: #3c1d78; /* Dark purple text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    text-align: center;
+    font-weight: bold; /* Bold text */
+    outline: none; /* Remove outline */
 }
 
+/* Button hover effect */
 .mood-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(145deg, #ffffff, #c5b6ff); /* Lighter gradient */
+    border-color: #a29bff; /* Slightly darker border */
 }
 
+/* Selected button styling */
 .mood-button.selected {
-  border: 2px solid #3c1d78; /* Highlight selected mood */
-  background-color: #d0c2ff; /* Light purple when selected */
+    border: 2px solid #3c1d78; /* Highlight selected mood */
+    background-color: #d0c2ff; /* Light purple when selected */
+    color: #3c1d78; /* Maintain dark purple text */
 }
 
 /* Heatmap styling */
 .heatmap {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .heatmap-box {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin: 4px;
-  font-size: 24px;
-  color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 4px;
+    font-size: 24px;
+    color: #fff;
 }
 
 .low {
-  background-color: #c7f2e3; /* Light green */
+    background-color: #c7f2e3; /* Light green */
 }
 
 .medium {
-  background-color: #ffee99; /* Light yellow */
+    background-color: #ffee99; /* Light yellow */
 }
 
 .high {
-  background-color: #fdd6d6; /* Light red */
+    background-color: #fdd6d6; /* Light red */
 }
 
 .very-high {
-  background-color: #f6a6a6; /* Darker red */
+    background-color: #f6a6a6; /* Darker red */
 }
 
 /* Record button styling */
 .record-button {
-  background-color: #3c1d78; /* Dark purple */
-  color: #ffffff; /* White text */
-  padding: 12px 24px;
-  border-radius: 30px;
-  font-size: 20px;
-  cursor: pointer;
-  border: none;
-  transition: background-color 0.3s ease;
-  display: inline-block;
-  margin-top: 10px;
+    background-color: #3c1d78; /* Dark purple */
+    color: #ffffff; /* White text */
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin-top: 10px;
 }
 
 .record-button:hover {
-  background-color: #2b0a56; /* Darker shade on hover */
+    background-color: #2b0a56; /* Darker shade on hover */
 }
 
 .record-button.disabled {
-  background-color: #d0c2ff; /* Light purple for disabled state */
-  cursor: not-allowed;
+    background-color: #d0c2ff; /* Light purple for disabled state */
+    cursor: not-allowed;
 }
 
 /* Styling for the "back" button */
 .mood-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-.mood-buttons {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 15px;
-    justify-content: center;
+    position: relative;
+    top: 20px;
+    left: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .text-black {
-  color: black;
+    color: black;
 }

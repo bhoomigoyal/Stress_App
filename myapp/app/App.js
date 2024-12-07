@@ -1,12 +1,12 @@
 // App.js
-import 'react-native-gesture-handler'; // Must be the first import
+import 'react-native-gesture-handler';  // Must be the first import
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-// import WelcomeScreen from './WelcomeScreen'; // Commented out to avoid errors
+import WelcomeScreen from './WelcomeScreen';
 import Home from './Home';
 import StressDataForm from './StressDataForm';
-import MoodTracker from './mood_tracker';
+import MoodTracker from './MoodTracker';
 
 const Stack = createStackNavigator();
 
@@ -14,7 +14,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator 
-        initialRouteName="Home" // Changed from "WelcomeScreen" to "Home"
+        initialRouteName="WelcomeScreen"
         screenOptions={{
           headerStyle: {
             backgroundColor: '#DAC0FC',
@@ -25,13 +25,11 @@ const App = () => {
           },
         }}
       >
-        {/*
         <Stack.Screen 
           name="WelcomeScreen" 
           component={WelcomeScreen} 
           options={{ headerShown: false }} 
         />
-        */}
         <Stack.Screen 
           name="Home" 
           component={Home}
